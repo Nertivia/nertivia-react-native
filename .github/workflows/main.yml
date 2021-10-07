@@ -28,7 +28,6 @@ jobs:
           name: app-release.apk
           path: android/app/build/outputs/apk/release/
       - name: GitHub Release Action
-        uses: actions/checkout@v2
         uses: ncipollo/release-action@v1
         with:
           artifacts: app-release.apk
