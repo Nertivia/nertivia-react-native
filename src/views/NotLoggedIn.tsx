@@ -11,6 +11,9 @@ import {
 import {postLogin} from '../services/accountService';
 import {setAxios} from '../services/axios';
 import appStore from '../store/app';
+import Hcaptcha from '../components/Hcaptcha';
+import popoutStore from '../store/popouts';
+
 export default () => {
   const [page, setPage] = useState(0);
 
@@ -49,11 +52,11 @@ const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const loginClicked = () => {
-    if (loggingIn) return;
+  const loginClicked = (captchaToken?: string) => {
+    if (loggingIn && !captchaToken) return;
     setLoggingIn(true);
 
-    postLogin(username, password)
+    postLogin(username, password, captchaToken)
       .then(res => {
         const {token} = res.data;
         asyncStorage.setItem('token', token);
@@ -61,7 +64,20 @@ const Login = () => {
         appStore.setToken(token);
       })
       .catch(err => {
-        console.log(err.response.data);
+        if (err.response) {
+          const {errors} = err.response.data;
+          errors.forEach((error: any) => {
+            if (error.code === 1) {
+              popoutStore.openPopup({
+                id: 'captcha',
+                component: Hcaptcha,
+                data: {
+                  onToken: loginClicked,
+                },
+              });
+            }
+          });
+        }
         setLoggingIn(false);
       });
   };
@@ -83,7 +99,7 @@ const Login = () => {
         onChangeText={setPassword}
         secureTextEntry={true}
       />
-      <Pressable style={styles.primaryButton} onPress={loginClicked}>
+      <Pressable style={styles.primaryButton} onPress={() => loginClicked()}>
         <Text style={{color: 'white', textAlign: 'center'}}>Login</Text>
       </Pressable>
     </View>

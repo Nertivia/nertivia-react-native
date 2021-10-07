@@ -25,7 +25,7 @@ const Popouts = observer(() => {
   return (
     <>
       {Object.values(popoutStore.popouts).map(popout => (
-        <popout.component key={popout.id} id={popout.id} />
+        <popout.component {...popout.data} key={popout.id} id={popout.id} />
       ))}
     </>
   );

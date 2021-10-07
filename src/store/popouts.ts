@@ -3,6 +3,7 @@ import {makeAutoObservable} from 'mobx';
 interface Popout {
   id: string;
   component: any;
+  data?: any
 }
 
 class PopoutStore {
