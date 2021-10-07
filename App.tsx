@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {SafeAreaView, StyleSheet} from 'react-native';
 import NotLoggedIn from './src/views/NotLoggedIn';
 import MainApp from './src/views/MainApp';
 import {observer} from 'mobx-react';
