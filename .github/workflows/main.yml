@@ -19,7 +19,7 @@ jobs:
         with:
           name: app-release.apk
           path: android/app/build/outputs/apk/release/
-      - name: get version information
+      - name: Get version information
         uses: antifree/json-to-variables@v1.0.1
         with:
           filename: 'src/changelog.json'
