@@ -1,4 +1,5 @@
-import React, {useRef, useState} from 'react';
+import React, {useState} from 'react';
+import asyncStorage from '@react-native-async-storage/async-storage';
 import {
   Image,
   Pressable,
@@ -7,6 +8,9 @@ import {
   View,
   TextInput,
 } from 'react-native';
+import {postLogin} from '../services/accountService';
+import {setAxios} from '../services/axios';
+import accountStore from '../store/account';
 export default () => {
   const [page, setPage] = useState(0);
 
@@ -30,26 +34,61 @@ export default () => {
 
 const LoginOrSignup = ({callback}: {callback: (page: number) => any}) => (
   <View style={styles.items}>
-    <Pressable style={styles.createAccountButton}>
+    <Pressable style={styles.primaryButton}>
       <Text style={{color: 'white', textAlign: 'center'}}>
         Create An Account
       </Text>
     </Pressable>
-    <Pressable style={styles.loginButton} onPress={() => callback(2)}>
+    <Pressable style={styles.secondaryButton} onPress={() => callback(2)}>
       <Text style={{color: 'white', textAlign: 'center'}}>Login Instead</Text>
     </Pressable>
   </View>
 );
-const Login = () => (
-  <View style={styles.items}>
-    <TextInput placeholder="Email/Username" autoCompleteType="email" />
-    <TextInput
-      placeholder="Password"
-      autoCompleteType="password"
-      secureTextEntry={true}
-    />
-  </View>
-);
+const Login = () => {
+  const [loggingIn, setLoggingIn] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginClicked = () => {
+    if (loggingIn) return;
+    setLoggingIn(true);
+
+    postLogin(username, password)
+      .then(res => {
+        const {token} = res.data;
+        asyncStorage.setItem('token', token);
+        setAxios(token);
+        accountStore.setToken(token);
+      })
+      .catch(err => {
+        console.log(err.response.data);
+        setLoggingIn(false);
+      });
+  };
+
+  return (
+    <View style={styles.items}>
+      <TextInput
+        placeholder="Username#Tag/Email"
+        autoCompleteType="email"
+        style={styles.input}
+        placeholderTextColor="rgba(255,255,255,0.4)"
+        onChangeText={setUsername}
+      />
+      <TextInput
+        style={styles.input}
+        placeholderTextColor="rgba(255,255,255,0.4)"
+        placeholder="Password"
+        autoCompleteType="password"
+        onChangeText={setPassword}
+        secureTextEntry={true}
+      />
+      <Pressable style={styles.primaryButton} onPress={loginClicked}>
+        <Text style={{color: 'white', textAlign: 'center'}}>Login</Text>
+      </Pressable>
+    </View>
+  );
+};
 
 const styles = StyleSheet.create({
   container: {
@@ -73,19 +112,28 @@ const styles = StyleSheet.create({
     margin: 10,
     marginTop: 'auto',
   },
-  createAccountButton: {
+  primaryButton: {
     backgroundColor: '#368dff',
     borderRadius: 4,
     padding: 10,
     marginBottom: 10,
     width: '100%',
   },
-  loginButton: {
+  secondaryButton: {
     borderColor: '#368dff',
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 4,
     padding: 10,
     width: '100%',
+  },
+  input: {
+    borderColor: '#368dff',
+    borderWidth: 1,
+    borderStyle: 'solid',
+    borderRadius: 4,
+    marginBottom: 10,
+    paddingLeft: 10,
+    color: 'white',
   },
 });

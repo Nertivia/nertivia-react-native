@@ -1,12 +1,17 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {ScrollView, Dimensions, StyleSheet, Text, View} from 'react-native';
 
 import LeftDrawer from '../components/LeftDrawer';
 import MessagesPage from '../components/MessagesPage';
+import {socket} from '../socket';
 
 const MainApp = () => {
   const mainWidth = Math.round(Dimensions.get('window').width);
   const drawerWidth = Math.round((mainWidth / 100) * 80);
+  useEffect(() => {
+    if (socket.connected) return;
+    socket.connect();
+  });
 
   return (
     <ScrollView
