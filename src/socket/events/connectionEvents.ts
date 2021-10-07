@@ -1,12 +1,12 @@
 import {Socket} from 'socket.io-client';
-import accountStore from '../../store/account';
+import appStore from '../../store/app';
 import channelStore from '../../store/channels';
 import serverStore from '../../store/servers';
 import {SuccessEvent} from './ConnectionEvents.types';
 
 export const onConnect = (socket: Socket) => {
   socket.emit('authentication', {
-    token: accountStore.token,
+    token: appStore.token,
   });
 };
 

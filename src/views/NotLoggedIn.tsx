@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import {postLogin} from '../services/accountService';
 import {setAxios} from '../services/axios';
-import accountStore from '../store/account';
+import appStore from '../store/app';
 export default () => {
   const [page, setPage] = useState(0);
 
@@ -58,7 +58,7 @@ const Login = () => {
         const {token} = res.data;
         asyncStorage.setItem('token', token);
         setAxios(token);
-        accountStore.setToken(token);
+        appStore.setToken(token);
       })
       .catch(err => {
         console.log(err.response.data);
