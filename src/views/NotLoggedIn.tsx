@@ -53,7 +53,7 @@ const Login = () => {
   const [password, setPassword] = useState('');
 
   const loginClicked = (captchaToken?: string) => {
-    if (loggingIn && !captchaToken) return;
+    if (loggingIn) return;
     setLoggingIn(true);
 
     postLogin(username, password, captchaToken)
