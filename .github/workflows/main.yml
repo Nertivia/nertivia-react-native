@@ -22,12 +22,12 @@ jobs:
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
-          name: app-release.apk
+          name: nertivia-${{ env.changelog_changes_0_version }}.apk
           path: android/app/build/outputs/apk/release/
       - name: GitHub Release Action
         uses: ncipollo/release-action@v1
         with:
           tag: v${{ env.changelog_changes_0_version }}
           name: ${{ env.changelog_changes_0_title }}
-          artifacts: android/app/build/outputs/apk/release/app-release.apk
+          artifacts: android/app/build/outputs/apk/release/nertivia-${{ env.changelog_changes_0_version }}.apk
           token: ${{ secrets.GITHUB_TOKEN }}
