@@ -1,10 +1,6 @@
 {
   "changes": [
     {
-      "title": "Testing apk name",
-      "version": "1.2.1"
-    },
-    {
       "title": "Added HCaptcha.",
       "version": "1.2.0"
     },
