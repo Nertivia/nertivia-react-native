@@ -18,20 +18,11 @@ const MainApp = () => {
       keyboardShouldPersistTaps="always"
       horizontal={true}
       snapToInterval={drawerWidth} //your element width
-      decelerationRate={'fast'}
+      decelerationRate="fast"
       contentOffset={{x: drawerWidth, y: 0}}
       pagingEnabled
-      snapToAlignment={'center'}
-      onMomentumScrollEnd={_e => {
-        // console.log(e.target);
-        // const left = Math.round(e.nativeEvent.contentOffset.x);
-        // const leftDrawer = left === 0;
-        // const main = left === drawerWidth;
-        // // const rightDrawer =
-        // //   left === drawerWidth + mainWidth - (mainWidth - drawerWidth);
-        // navigatorStore.setDrawerPage(leftDrawer ? 0 : main ? 1 : 2);
-      }}
-      style={styles.scroll}>
+      snapToAlignment="center"
+      style={styles.drawer}>
       <View style={{...styles.drawerPage, width: drawerWidth}}>
         <LeftDrawer />
       </View>
@@ -46,7 +37,7 @@ const MainApp = () => {
 };
 
 const styles = StyleSheet.create({
-  scroll: {
+  drawer: {
     height: '100%',
   },
   drawerPage: {
