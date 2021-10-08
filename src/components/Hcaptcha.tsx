@@ -3,7 +3,7 @@ import {View, Text, StyleSheet, Pressable} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {WebView} from 'react-native-webview';
 import popoutStore from '../store/popouts';
-
+import colors from '../colors.json';
 export default (props: {onToken: (token: string) => void; id: string}) => {
   const closePopout = () => {
     popoutStore.closePopout(props.id);
@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     height: 40,
-    backgroundColor: '#2672d6',
+    backgroundColor: colors.header,
     alignItems: 'center',
   },
   closeButton: {

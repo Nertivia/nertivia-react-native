@@ -6,6 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import messageStore from '../store/messages';
 import navigatorStore from '../store/navigator';
 import {socket} from '../socket';
+import colors from '../colors.json';
 export default observer(() => {
   const [inputValue, setInput] = useState('');
 
@@ -26,6 +27,7 @@ export default observer(() => {
         placeholder="Type Your Message"
         value={inputValue}
         multiline={true}
+        placeholderTextColor="rgba(255,255,255,0.4)"
       />
       <View style={styles.sendButton}>
         <Pressable
@@ -52,11 +54,12 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'rgba(255,255,255,0.1)',
     paddingLeft: 10,
+    color: 'white',
     marginLeft: 10,
     borderRadius: 10,
   },
   sendButton: {
-    backgroundColor: '#368dff',
+    backgroundColor: colors.primary,
     overflow: 'hidden',
     marginLeft: 10,
     borderRadius: 25,

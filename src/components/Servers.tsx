@@ -5,12 +5,13 @@ import serverStore from '../store/servers';
 import Server from '../interfaces/Server';
 import navigatorStore from '../store/navigator';
 import Avatar from './Avatar';
+import colors from '../colors.json';
 
 const ServerTemplate = observer(({server}: {server: Server}) => {
   const handleStyle = {
     backgroundColor:
       navigatorStore.selectedServerId === server.server_id
-        ? '#368dff'
+        ? colors.primary
         : 'transparent',
   };
   return (

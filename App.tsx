@@ -5,7 +5,7 @@ import MainApp from './src/views/MainApp';
 import {observer} from 'mobx-react';
 import appStore from './src/store/app';
 import popoutStore from './src/store/popouts';
-
+import colors from './src/colors.json';
 const App = () => {
   return (
     <SafeAreaView style={styles.container}>
@@ -35,6 +35,6 @@ export default App;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#202124',
+    backgroundColor: colors.background,
   },
 });

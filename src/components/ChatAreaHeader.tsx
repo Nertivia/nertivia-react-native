@@ -5,7 +5,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import channelStore from '../store/channels';
 import Avatar from './Avatar';
 import serverStore from '../store/servers';
-
+import colors from '../colors.json';
 export default observer(() => {
   const selectedChannelId = navigatorStore.selectedChannelId;
   const channel = channelStore.channels[selectedChannelId || ''];
@@ -25,7 +25,7 @@ export default observer(() => {
 const styles = StyleSheet.create({
   container: {
     height: 40,
-    backgroundColor: '#2672d6',
+    backgroundColor: colors.header,
     justifyContent: 'center',
     alignItems: 'flex-start',
     paddingLeft: 5,

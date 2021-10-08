@@ -3,6 +3,7 @@ import {Linking, Pressable, StyleSheet, Text, View} from 'react-native';
 import {changes} from '../../changelog.json';
 import appStore from '../../store/app';
 import popoutStore from '../../store/popouts';
+import colors from '../../colors.json';
 
 export default (props: {id: string}) => (
   <View style={styles.container}>
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
   },
   button: {
-    backgroundColor: '#368dff',
+    backgroundColor: colors.primary,
     margin: 5,
     padding: 10,
     color: 'white',
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
   },
   secondaryButton: {
     backgroundColor: 'rgba(0,0,0,0)',
-    borderColor: '#368dff',
+    borderColor: colors.primary,
     borderWidth: 1,
   },
 });

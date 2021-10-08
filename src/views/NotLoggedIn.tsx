@@ -13,6 +13,7 @@ import {setAxios} from '../services/axios';
 import appStore from '../store/app';
 import Hcaptcha from '../components/Hcaptcha';
 import popoutStore from '../store/popouts';
+import colors from '../colors.json';
 
 export default () => {
   const [page, setPage] = useState(0);
@@ -129,14 +130,14 @@ const styles = StyleSheet.create({
     marginTop: 'auto',
   },
   primaryButton: {
-    backgroundColor: '#368dff',
+    backgroundColor: colors.primary,
     borderRadius: 4,
     padding: 10,
     marginBottom: 10,
     width: '100%',
   },
   secondaryButton: {
-    borderColor: '#368dff',
+    borderColor: colors.primary,
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 4,
@@ -144,7 +145,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   input: {
-    borderColor: '#368dff',
+    borderColor: colors.primary,
     borderWidth: 1,
     borderStyle: 'solid',
     borderRadius: 4,

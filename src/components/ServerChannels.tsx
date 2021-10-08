@@ -5,12 +5,13 @@ import {ScrollView, StyleSheet, Text, Pressable, View} from 'react-native';
 import Channel from '../interfaces/Channel';
 import channelStore from '../store/channels';
 import navigatorStore, {DrawerPages} from '../store/navigator';
+import colors from '../colors.json';
 
 const ChannelTemplate = observer((props: {channel: Channel}) => {
   const handleStyle = {
     backgroundColor:
       navigatorStore.selectedChannelId === props.channel.channelID
-        ? '#368dff'
+        ? colors.primary
         : 'transparent',
   };
   return (

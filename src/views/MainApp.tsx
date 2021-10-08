@@ -4,7 +4,7 @@ import {ScrollView, Dimensions, StyleSheet, Text, View} from 'react-native';
 import LeftDrawer from '../components/LeftDrawer';
 import MessagesPage from '../components/MessagesPage';
 import {socket} from '../socket';
-
+import colors from '../colors.json';
 const MainApp = () => {
   const mainWidth = Math.round(Dimensions.get('window').width);
   const drawerWidth = Math.round((mainWidth / 100) * 80);
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   drawerPage: {
     height: '100%',
-    backgroundColor: '#1a1a1d',
+    backgroundColor: colors.drawer,
   },
   mainPage: {
     height: '100%',
