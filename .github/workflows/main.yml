@@ -11,19 +11,19 @@ jobs:
       - name: Install npm dependencies
         run: |
           npm install
-      - name: Build Android Release
-        run: |
-          cd android && chmod +x ./gradlew && ./gradlew assembleRelease
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: app-release.apk
-          path: android/app/build/outputs/apk/release/
       - name: Get version information
         uses: antifree/json-to-variables@v1.0.1
         with:
           filename: 'src/changelog.json'
           prefix: changelog
+      - name: Build Android Release
+        run: |
+          cd android && chmod +x ./gradlew && ./gradlew assembleRelease && mv app/build/outputs/apk/release/app-release.apk app/build/outputs/apk/release/nertivia-${{ env.changelog_changes_0_version }}.apk
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: app-release.apk
+          path: android/app/build/outputs/apk/release/
       - name: GitHub Release Action
         uses: ncipollo/release-action@v1
         with:
